@@ -1,0 +1,131 @@
+/* ==============================
+            Resets
+=============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/* ==============================
+            Style
+=============================== */
+
+main {
+    background-color: rgb(69, 181, 255);
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* display: none; */
+}
+
+
+.prevent-select {
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.hide {
+    display: none;
+}
+
+.button{
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 900;
+    padding: 1rem 3rem;
+    background-color: orange;
+    border: none;
+}
+
+/* ==============================
+            Game
+=============================== */
+.game{
+    height: 100svh;
+    background-color: red;
+    padding: 2rem 0rem;
+}
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: lightblue; */
+    padding: .5rem 0rem;
+}
+.game p{
+    background-color: aliceblue;
+    padding: 1rem 1rem;
+    border-radius: .5rem;
+}
+
+.bubble {
+    background-color: black;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: none;
+}
+
+
+
+/* ==============================
+           Animation
+=============================== */
+.loader{
+    width: 5%;
+    background-color: transparent;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border-top: 3px solid black;
+    animation: rotation .5s 3 linear;
+}
+@keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
