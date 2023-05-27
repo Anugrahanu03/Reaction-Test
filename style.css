@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 /* ==============================
             Resets
 =============================== */
@@ -38,16 +40,22 @@ h6 {
             Style
 =============================== */
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 main {
-    background-color: rgb(69, 181, 255);
+    font-family: 'Press Start 2P', cursive;
+    background-color: #222;
     height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    /* display: none; */
+    font-size: 2rem;
+    font-weight: 100;
+    color: #36d6b6;
+    text-align: center;
 }
-
 
 .prevent-select {
     -webkit-user-select: none;
@@ -62,38 +70,109 @@ main {
     display: none;
 }
 
-.button{
+.button {
+    width: 90%;
+    max-width: 25rem;
+    align-self: center;
     text-transform: uppercase;
-    font-size: 2rem;
-    font-weight: 900;
-    padding: 1rem 3rem;
-    background-color: orange;
-    border: none;
+    font-size: 1.5rem;
+    font-weight: 100;
+    padding: 1.5rem 3rem;
+    background-color: transparent;
+    background-image: linear-gradient(#36d6b6, #36d6b6);
+    border: 1px solid #36d6b6;
+    color: #36d6b6;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms, color 500ms, box-shadow 500ms;
+    border-radius: .3rem;
+    margin-top: 4rem;
 }
+
+.button:hover,
+.button:focus {
+    background-size: 100% 100%;
+    background-position-x: left;
+    cursor: pointer;
+    color: #222;
+    box-shadow: 0px 0px 30px 5px #36d6b640;
+}
+
+main h1:hover+.button {
+    color: rgb(0, 217, 255);
+}
+
+::selection {
+    color: #fff;
+}
+
+form {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 4rem;
+    padding: 1.5rem 3rem;
+}
+
+.login {
+    color: #36d6b6;
+    background-color: #222;
+    border: 0;
+    border-bottom: 1px solid #36d6b6;
+    outline: none;
+}
+
+form [type="submit"] {
+    padding: 0em 1em;
+    background-color: transparent;
+    border: none;
+    color: #36d6b6;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+form [type="submit"]:hover {
+    background-color: #36d6b6;
+    color: #222;
+}
+
+.login:focus+.focus {
+    border: 1px solid #36d6b6;
+}
+
 
 /* ==============================
             Game
 =============================== */
-.game{
-    height: 100svh;
-    background-color: red;
-    padding: 2rem 0rem;
+section {
+    font-family: 'Poppins', sans-serif;
 }
-.header{
+
+.game {
+    height: 100svh;
+    background-color: #222;
+}
+
+.header {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    /* background-color: lightblue; */
-    padding: .5rem 0rem;
+    text-align: center;
+    flex-wrap: wrap;
 }
-.game p{
-    background-color: aliceblue;
+
+.header>* {
+    flex: 1;
+}
+
+.game p {
+    background-color: #36d6b6;
     padding: 1rem 1rem;
-    border-radius: .5rem;
 }
 
 .bubble {
-    background-color: black;
+    box-shadow: 0 0 5px 2px #3bfad4;
+    background: radial-gradient(circle at 40px 10px, #cafff4 1%, #10facb 90%);
     height: 150px;
     width: 150px;
     border-radius: 50%;
@@ -110,22 +189,28 @@ main {
 /* ==============================
            Animation
 =============================== */
-.loader{
-    width: 5%;
-    background-color: transparent;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    border-top: 3px solid black;
-    animation: rotation .5s 3 linear;
+
+
+
+
+/* ==============================
+           Media Query
+=============================== */
+@media(max-width:530px) {
+    main h1 {
+        font-size: 2.125rem;
+    }
+
+    .button {
+        scale: .8;
+    }
+
+    .header {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .header p {
+        padding: 0;
+    }
 }
-@keyframes rotation {
-    0% {
-      transform: rotate(0deg);
-    }
-    50% {
-      transform: rotate(180deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }

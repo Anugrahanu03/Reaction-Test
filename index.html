@@ -12,10 +12,14 @@
 <body>
     <main>
         <h1>Reaction Test</h1>
-        <button class = "button">Start Game</button>
-        <!-- <div class="loader"></div> -->
+        <button class="button hide">Start Game</button>
+        <form action="" id="loginForm" class="">
+            <label for="name"></label>
+            <input class="login" type="text" name="name" id="name" placeholder="Enter your name...">
+            <input class="focus" type="submit" value="Login">
+        </form>
     </main>
-    <section class="game">
+    <section class="game hide">
         <div class="header prevent-select">
             <p>Best Time: <span class="best-score">0 ms</span></p>
             <p>Reaction Time: <span class="reaction-score">0 ms</span></p>
@@ -23,7 +27,7 @@
         </div>
         <div class="bubble"></div>
     </section>
-    
+
 
     <script src="app.js"></script>
 </body>

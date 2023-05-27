@@ -1,6 +1,4 @@
-//Add 3 pages
-// Store best values
-// Find a way to get who all played the game
+// localStorage.clear();
 
 
 const bubble = document.querySelector(".bubble");
@@ -17,19 +15,41 @@ let bestTime = 999999
 
 window.addEventListener('load', (event) => {
     console.log("Page has loaded");
-    // localStorage.clear();
+    const startGame = document.querySelector("button");
     const loader = document.querySelector(".loader");
     const main = document.querySelector("main");
+    const game = document.querySelector(".game");
 
-    // loader.addEventListener("animationend", (event) => {
-    //     // loader.classList.add("hide");
-    //     main.classList.add("hide");
-    // });
+    let loginForm = document.getElementById("loginForm");
 
-    const startButton = document.querySelector(".button");
-    startButton.addEventListener("click", (event) => {
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let username = document.getElementsByName("name")[0];
+        username.value = username.value.trim();
+        console.log("value " + username.value);
+        if (username.value == "") {
+            alert("Enter your name to continue!");
+        } else {
+            console.log(
+                `UserName:- ${username.value}`
+            );
+            localStorage.setItem("name", username.value.toLowerCase())
+            username.value = "";
+
+            const form = document.querySelector("form");
+            form.classList.add("hide");
+            startGame.classList.remove("hide");
+        }
+    });
+
+
+    startGame.addEventListener("click", (event) => {
         main.classList.add("hide");
-        bestScore.innerText = localStorage.getItem("best") == null ? 0: localStorage.getItem("best") + " ms";
+        game.classList.remove("hide");
+        bestScore.innerText =
+            localStorage.getItem(localStorage.getItem("name")) == null ?
+                0 : localStorage.getItem(localStorage.getItem("name")) + " ms";
 
         //1. Make the shape appear
         appearAfterDelay();
@@ -89,7 +109,12 @@ function gameOver() {
     // header.innerText = "Game Over"
     const averageScore = document.querySelector(".average-score");
     averageScore.innerText = average + " ms";
-    localStorage.setItem("best",bestTime);
+    if (localStorage.getItem(localStorage.getItem("name")) > bestTime) {
+        localStorage.setItem(localStorage.getItem("name"), bestTime);
+    }
+    else {
+        localStorage.setItem(localStorage.getItem("name"), bestTime);
+    }
 }
 
 
