@@ -14,34 +14,48 @@ let bestTime = 999999
 
 
 window.addEventListener('load', (event) => {
+
     console.log("Page has loaded");
     const startGame = document.querySelector("button");
     const loader = document.querySelector(".loader");
     const main = document.querySelector("main");
     const game = document.querySelector(".game");
 
-    let loginForm = document.getElementById("loginForm");
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyEVFLySNsPhzPg-zqXGJOAdPFx_1Mo-A5s3RctbcuIQdyndx7f0_yoIYdxo-r7mkDS8Q/exec';
+    const form = document.forms['submit-to-google-sheet']
 
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        const submitButton = document.querySelector(".focus").value = "Loggin in...";
+        
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(response => {
+                console.log('Success!', response);
+                document.querySelector(".focus").value = "Login";
+                storeUserName();
+            })
+            .catch(error => console.error('Error!', error.message));
 
-        let username = document.getElementsByName("name")[0];
-        username.value = username.value.trim();
-        console.log("value " + username.value);
-        if (username.value == "") {
-            alert("Enter your name to continue!");
-        } else {
-            console.log(
-                `UserName:- ${username.value}`
-            );
-            localStorage.setItem("name", username.value.toLowerCase())
-            username.value = "";
+        function storeUserName() {
+            let username = document.getElementsByName("name")[0];
+            username.value = username.value.trim();
+            console.log("value " + username.value);
+            if (username.value == "") {
+                alert("Enter your name to continue!");
+            } else {
+                console.log(
+                    `UserName:- ${username.value}`
+                );
+                localStorage.setItem("name", username.value.toLowerCase())
+                username.value = "";
 
-            const form = document.querySelector("form");
-            form.classList.add("hide");
-            startGame.classList.remove("hide");
+                const hideForm = document.querySelector("form");
+                hideForm.classList.add("hide");
+                console.log("from hid");
+                startGame.classList.remove("hide");
+            }
         }
-    });
+    })
 
 
     startGame.addEventListener("click", (event) => {
@@ -78,7 +92,7 @@ function appearAfterDelay() {
     setTimeout(showBubble, 1000);//Make delay random
     bubble.style.top = `${Math.floor(Math.random() * 70) + 20}%`;
     bubble.style.left = `${Math.floor(Math.random() * 80) + 10}%`;
-    bubble.style.height = bubble.style.width = `${Math.floor(Math.random() * 100) + (window.innerWidth * 0.03125)}px`;
+    bubble.style.height = bubble.style.width = `${Math.floor(Math.random() * 100) + 50}px`;
 }
 function showBubble() {
     bubble.style.display = "block";
@@ -117,5 +131,25 @@ function gameOver() {
     }
 }
 
+
+// function storeUserName() {
+//     let username = document.getElementsByName("name")[0];
+//     username.value = username.value.trim();
+//     console.log("value " + username.value);
+//     if (username.value == "") {
+//         alert("Enter your name to continue!");
+//     } else {
+//         console.log(
+//             `UserName:- ${username.value}`
+//         );
+//         localStorage.setItem("name", username.value.toLowerCase())
+//         username.value = "";
+
+//         const hideForm = document.querySelector("form");
+//         hideForm.classList.add("hide");
+//         console.log("from hid");
+//         startGame.classList.remove("hide");
+//     }
+// }
 
 //document.location.reload(true);
