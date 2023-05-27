@@ -113,6 +113,11 @@ form {
     font-weight: 400;
     margin-top: 4rem;
     padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .login {
