@@ -127,6 +127,20 @@ form {
     border-bottom: 1px solid #36d6b6;
     outline: none;
 }
+.again{
+    text-align: center;
+    align-content: center;
+    /* border: 1px solid #36d6b6;  */
+    color: white;
+    transition: transform .2s;
+    height: 90%;
+    width: 100%;
+}
+
+.again:hover{
+    color: #36d6b6;
+    cursor: pointer;
+}
 
 form [type="submit"] {
     padding: 0em 1em;
@@ -157,6 +171,7 @@ section {
 .game {
     height: 100svh;
     background-color: #222;
+    /* border: 1px solid red; */
 }
 
 .header {
