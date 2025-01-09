@@ -6,7 +6,7 @@ const reactionScore = document.querySelector(".reaction-score");
 const bestScore = document.querySelector(".best-score");
 
 let clickCounter = 0;
-let numberOfTries = 3;
+let numberOfTries = 2;
 let totalTime = 0;
 let startTime = new Date().getTime();
 let reactionTime = 0;
@@ -20,21 +20,15 @@ window.addEventListener('load', (event) => {
     const loader = document.querySelector(".loader");
     const main = document.querySelector("main");
     const game = document.querySelector(".game");
+    const again = document.querySelector(".again");
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyEVFLySNsPhzPg-zqXGJOAdPFx_1Mo-A5s3RctbcuIQdyndx7f0_yoIYdxo-r7mkDS8Q/exec';
+    //const scriptURL = 'https://script.google.com/macros/s/AKfycbyEVFLySNsPhzPg-zqXGJOAdPFx_1Mo-A5s3RctbcuIQdyndx7f0_yoIYdxo-r7mkDS8Q/exec';
     const form = document.forms['submit-to-google-sheet']
 
     form.addEventListener('submit', e => {
         e.preventDefault()
         const submitButton = document.querySelector(".focus").value = "Loggin in...";
-        
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(response => {
-                console.log('Success!', response);
-                document.querySelector(".focus").value = "Login";
-                storeUserName();
-            })
-            .catch(error => console.error('Error!', error.message));
+        storeUserName();
 
         function storeUserName() {
             let username = document.getElementsByName("name")[0];
@@ -48,13 +42,41 @@ window.addEventListener('load', (event) => {
                 );
                 localStorage.setItem("name", username.value.toLowerCase())
                 username.value = "";
-
+        
                 const hideForm = document.querySelector("form");
                 hideForm.classList.add("hide");
                 console.log("from hid");
                 startGame.classList.remove("hide");
+                again.classList.add("hide");
             }
         }
+        // fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        //     .then(response => {
+        //         console.log('Success!', response);
+        //         document.querySelector(".focus").value = "Login";
+        //         storeUserName();
+        //     })
+        //     .catch(error => console.error('Error!', error.message));
+
+        // function storeUserName() {
+        //     let username = document.getElementsByName("name")[0];
+        //     username.value = username.value.trim();
+        //     console.log("value " + username.value);
+        //     if (username.value == "") {
+        //         alert("Enter your name to continue!");
+        //     } else {
+        //         console.log(
+        //             `UserName:- ${username.value}`
+        //         );
+        //         localStorage.setItem("name", username.value.toLowerCase())
+        //         username.value = "";
+
+        //         const hideForm = document.querySelector("form");
+        //         hideForm.classList.add("hide");
+        //         console.log("from hid");
+        //         startGame.classList.remove("hide");
+        //     }
+        // }
     })
 
 
@@ -76,7 +98,8 @@ bubble.addEventListener('click', (e) => {
     clickCounter++;
     hideBubble();                           // onclick bubble disappears
     calculateReactionTime(clickTime);
-    if (clickCounter != numberOfTries) {
+    if (clickCounter <= numberOfTries) {
+        console.log("counter" + clickCounter)
         appearAfterDelay();                 // bubble appears again after some time
     } else {
         gameOver();
@@ -129,27 +152,14 @@ function gameOver() {
     else {
         localStorage.setItem(localStorage.getItem("name"), bestTime);
     }
+    const again = document.querySelector(".again");
+    again.classList.remove("hide");
+    again.addEventListener("click", (event) => {
+        clickCounter = 0;
+        again.classList.add("hide")
+        appearAfterDelay();
+    });
 }
 
-
-// function storeUserName() {
-//     let username = document.getElementsByName("name")[0];
-//     username.value = username.value.trim();
-//     console.log("value " + username.value);
-//     if (username.value == "") {
-//         alert("Enter your name to continue!");
-//     } else {
-//         console.log(
-//             `UserName:- ${username.value}`
-//         );
-//         localStorage.setItem("name", username.value.toLowerCase())
-//         username.value = "";
-
-//         const hideForm = document.querySelector("form");
-//         hideForm.classList.add("hide");
-//         console.log("from hid");
-//         startGame.classList.remove("hide");
-//     }
-// }
 
 //document.location.reload(true);
